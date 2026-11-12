@@ -26,8 +26,8 @@ object ActionRunner {
             }
         )
         nm.createNotificationChannel(
-            NotificationChannel(CHANNEL_ALERTS, "Network alerts", NotificationManager.IMPORTANCE_HIGH).apply {
-                description = "Notifications you set up for connecting to or leaving a network"
+            NotificationChannel(CHANNEL_ALERTS, "Custom notifications", NotificationManager.IMPORTANCE_HIGH).apply {
+                description = "The notifications you add as actions for connecting to or leaving a network"
             }
         )
     }

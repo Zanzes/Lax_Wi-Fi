@@ -1,7 +1,6 @@
 package com.laxwifi.app
 
 import android.app.Notification
-import android.app.NotificationManager
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -130,25 +129,17 @@ class MonitorService : Service() {
 
     private fun publish() {
         val status = WifiStatus(onWifi = linkProps.isNotEmpty(), matchedId = matched.values.firstOrNull())
-        if (MonitorState.status.value != status) {
-            MonitorState.status.value = status
-            getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, buildNotification())
-        }
+        MonitorState.status.value = status
     }
 
+    // The text is fixed on purpose: re-posting it on every connect and disconnect
+    // read as a fresh notification each time.
     private fun buildNotification(): Notification {
-        val status = MonitorState.status.value
-        val name = Repo.get(status.matchedId)?.name
-        val text = when {
-            name != null -> "Connected to $name"
-            status.onWifi -> "On an unsaved Wi-Fi network"
-            else -> "Not on Wi-Fi"
-        }
         return Notification.Builder(this, ActionRunner.CHANNEL_MONITOR)
             .setSmallIcon(R.drawable.ic_stat_wifi)
             .setColor(0xFFFF00D4.toInt())
             .setContentTitle("Lax Wi-Fi")
-            .setContentText(text)
+            .setContentText("Watching for Wi-Fi changes")
             .setContentIntent(ActionRunner.openAppIntent(this))
             .setOngoing(true)
             .setOnlyAlertOnce(true)
