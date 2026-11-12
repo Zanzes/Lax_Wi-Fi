@@ -71,4 +71,4 @@ All source is under `app/src/main/java/com/laxwifi/app/`.
 
 ## Status
 
-Tested on an Android 17 emulator: adding a network, connect and disconnect actions, and restart after reboot. Not yet tested on a physical phone, where vendor battery savers may interfere with background monitoring.
+Tested on an Android 17 emulator: adding a network, connect and disconnect actions, and restart after reboot. Also tested on a physical phone. Vendor battery savers on other phones may still interfere with background monitoring.
