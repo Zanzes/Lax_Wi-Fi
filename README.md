@@ -37,6 +37,11 @@ The home screen shows a **Finish setup** card for any of the first three that ar
 
 A foreground service keeps the network callback registered, so a low-priority notification is always visible while the app is monitoring. After a reboot Android can take a minute or two to restart it.
 
+The app has two notification categories in Android's settings:
+
+- **Wi-Fi monitoring** is the ongoing notification. Its text never changes, and turning the category off hides it without stopping monitoring.
+- **Custom notifications** covers the notifications you add as actions. Set their sound here.
+
 ## Building
 
 Requirements:
@@ -55,6 +60,8 @@ The APK is written to `app/build/outputs/apk/debug/app-debug.apk`. Install it wi
 ```bash
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 ```
+
+Debug and release builds are signed with different keys, so one cannot be installed over the other; Android reports "App not installed". To switch between them, uninstall the app first, which erases its saved networks and settings.
 
 ## Project layout
 
